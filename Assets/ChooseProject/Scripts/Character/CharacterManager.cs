@@ -44,7 +44,7 @@ public class CharacterManager : MonoBehaviour
         modifiers.Add(modifier);
 
 
-        RecalculateStats();
+        RefreshCharacter();
     }
 
     public void RemoveLastModifier()
@@ -53,6 +53,10 @@ public class CharacterManager : MonoBehaviour
             return;
 
         modifiers.RemoveAt(modifiers.Count - 1);
+        RefreshCharacter();
+    }
+    private void RefreshCharacter()
+    {
         RecalculateStats();
     }
 
@@ -62,7 +66,7 @@ public class CharacterManager : MonoBehaviour
 
         baseStats = CreateStats(data);
 
-        RecalculateStats();
+        RefreshCharacter();
     }
 
     private CharacterStats CreateStats(CharacterData data)
@@ -85,7 +89,7 @@ public class CharacterManager : MonoBehaviour
     {
         modifiers.Clear();
 
-        RecalculateStats();
+        RefreshCharacter();
     }
     private void RecalculateStats()
     {
