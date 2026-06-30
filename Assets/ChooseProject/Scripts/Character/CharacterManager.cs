@@ -9,7 +9,9 @@ public class CharacterManager : MonoBehaviour
 
     public CharacterStats FinalStats => finalStats;
     private readonly List<StatModifier> modifiers = new();
-    [SerializeField] private CharacterData currentCharacterData;
+
+    [SerializeField]
+    private CharacterData[] characterClasses;
 
     private CharacterStats baseStats;
 
@@ -19,12 +21,19 @@ public class CharacterManager : MonoBehaviour
     private void Awake()
     {
 
-        baseStats = CreateStats(currentCharacterData);
-        //Debug.Log($"Current Character: {currentCharacterData.ClassName}");
+        SelectCharacter(0);
+
         RecalculateStats();
-        //Debug.Log($"Base Stats: Health: {baseStats.Health}, Attack: {baseStats.Attack}, Defense: {baseStats.Defense}, Speed: {baseStats.Speed}");
+
     }
 
+
+    public void SelectCharacter(int index)
+    {
+        if (index < 0 || index >= characterClasses.Length) return;
+
+        ChangeCharacter(characterClasses[index]);
+    }
     public void AddRandomModifier()
     {
         StatModifier modifier = new()
@@ -45,6 +54,15 @@ public class CharacterManager : MonoBehaviour
             return;
 
         modifiers.RemoveAt(modifiers.Count - 1);
+        RecalculateStats();
+    }
+
+    private void ChangeCharacter(CharacterData data)
+    {
+        modifiers.Clear();
+
+        baseStats = CreateStats(data);
+
         RecalculateStats();
     }
 
