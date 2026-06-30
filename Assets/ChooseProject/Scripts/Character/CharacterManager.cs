@@ -1,22 +1,28 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class CharacterManager : MonoBehaviour
 {
-    private List<StatModifier> modifiers = new();
-    [SerializeField]
-    private CharacterData currentCharacterData;
+    public event Action OnStatsChanged;
+
+    public CharacterStats FinalStats => finalStats;
+    private readonly List<StatModifier> modifiers = new();
+    [SerializeField] private CharacterData currentCharacterData;
 
     private CharacterStats baseStats;
 
     private CharacterStats finalStats;
 
 
-    private void Start()
+    private void Awake()
     {
-        baseStats = CreateStats(currentCharacterData);
 
+        baseStats = CreateStats(currentCharacterData);
+        //Debug.Log($"Current Character: {currentCharacterData.ClassName}");
         RecalculateStats();
+        //Debug.Log($"Base Stats: Health: {baseStats.Health}, Attack: {baseStats.Attack}, Defense: {baseStats.Defense}, Speed: {baseStats.Speed}");
     }
 
     public void AddRandomModifier()
@@ -78,5 +84,6 @@ public class CharacterManager : MonoBehaviour
                     break;
             }
         }
+        OnStatsChanged?.Invoke();
     }
 }
