@@ -81,6 +81,12 @@ public class CharacterManager : MonoBehaviour
         return result;
     }
 
+    public void ResetCharacter()
+    {
+        modifiers.Clear();
+
+        RecalculateStats();
+    }
     private void RecalculateStats()
     {
 

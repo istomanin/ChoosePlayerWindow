@@ -41,4 +41,16 @@ public class CharacterStats : ICloneable
 
         return Stats[randomIndex].Type;
     }
+
+    public int GetPower()
+    {
+        int power = 0;
+
+        foreach (Stats stat in Stats)
+        {
+            power += stat.Value;
+        }
+
+        return power;
+    }
 }

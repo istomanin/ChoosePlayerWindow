@@ -17,6 +17,9 @@ public class UIManager : MonoBehaviour
     private Text modifiersText;
 
     [SerializeField]
+    private Text powerText;
+
+    [SerializeField]
     private CharacterManager characterManager;
 
     private void Start()
@@ -28,12 +31,9 @@ public class UIManager : MonoBehaviour
 
     public void UpdateUI()
     {
-
         UpdateStats();
         UpdateModifiers();
-
-
-
+        UpdatePower();
     }
 
     private void UpdateStats()
@@ -61,6 +61,11 @@ public class UIManager : MonoBehaviour
         }
 
         modifiersText.text = builder.ToString();
+    }
+
+    private void UpdatePower()
+    {
+        powerText.text = characterManager.FinalStats.GetPower().ToString();
     }
 
     private void OnDestroy()
