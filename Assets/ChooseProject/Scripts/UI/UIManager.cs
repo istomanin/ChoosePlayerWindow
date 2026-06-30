@@ -26,10 +26,10 @@ public class UIManager : MonoBehaviour
     {
         CharacterStats stats = characterManager.FinalStats;
 
-        statsHealth.text = stats.Health.ToString();
-        statsAttack.text = stats.Attack.ToString();
-        statsDefense.text = stats.Defense.ToString();
-        statsSpeed.text = stats.Speed.ToString();
+        statsHealth.text = stats.GetValue(StatType.Health).ToString();
+        statsAttack.text = stats.GetValue(StatType.Attack).ToString();
+        statsDefense.text = stats.GetValue(StatType.Defense).ToString();
+        statsSpeed.text = stats.GetValue(StatType.Speed).ToString();
     }
 
     private void OnDestroy()

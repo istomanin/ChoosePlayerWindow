@@ -68,40 +68,31 @@ public class CharacterManager : MonoBehaviour
 
     private CharacterStats CreateStats(CharacterData data)
     {
-        return new CharacterStats()
+        CharacterStats stats = new();
+
+        foreach (Stats stat in data.BaseStats)
         {
-            Health = data.Health,
-            Attack = data.Attack,
-            Defense = data.Defense,
-            Speed = data.Speed
-        };
+            stats.Stats.Add(new Stats()
+            {
+                Type = stat.Type,
+                Value = stat.Value
+            });
+        }
+
+        return stats;
     }
 
     private void RecalculateStats()
     {
+
         finalStats = (CharacterStats)baseStats.Clone();
 
         foreach (StatModifier modifier in modifiers)
         {
-            switch (modifier.StatType)
-            {
-                case StatType.Health:
-                    finalStats.Health += modifier.Value;
-                    break;
-
-                case StatType.Attack:
-                    finalStats.Attack += modifier.Value;
-                    break;
-
-                case StatType.Defense:
-                    finalStats.Defense += modifier.Value;
-                    break;
-
-                case StatType.Speed:
-                    finalStats.Speed += modifier.Value;
-                    break;
-            }
+            finalStats.AddValue(modifier.StatType, modifier.Value);
         }
+
         OnStatsChanged?.Invoke();
+
     }
 }

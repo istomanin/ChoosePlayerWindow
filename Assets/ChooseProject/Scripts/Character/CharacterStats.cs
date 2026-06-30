@@ -1,20 +1,37 @@
 using System;
+using System.Collections.Generic;
 
 public class CharacterStats : ICloneable
 {
-    public int Health;
-    public int Attack;
-    public int Defense;
-    public int Speed;
+    public List<Stats> Stats = new();
 
     public object Clone()
     {
-        return new CharacterStats
+        CharacterStats clone = new();
+
+        foreach (Stats stat in Stats)
         {
-            Health = Health,
-            Attack = Attack,
-            Defense = Defense,
-            Speed = Speed
-        };
+            clone.Stats.Add(new Stats()
+            {
+                Type = stat.Type,
+                Value = stat.Value
+            });
+        }
+
+        return clone;
+    }
+
+
+    public int GetValue(StatType type)
+    {
+        return Stats.Find(s => s.Type == type).Value;
+    }
+
+    public void AddValue(StatType type, int value)
+    {
+        Stats stat = Stats.Find(s => s.Type == type);
+
+        if (stat != null)
+            stat.Value += value;
     }
 }

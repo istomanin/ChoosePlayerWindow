@@ -13,7 +13,12 @@ MonoBehaviour:
   m_Name: Archer
   m_EditorClassIdentifier: Assembly-CSharp::CharacterData
   className: Archer
-  health: 50
-  attack: 90
-  defense: 10
-  speed: 30
+  baseStats:
+  - Type: 0
+    Value: 60
+  - Type: 1
+    Value: 90
+  - Type: 2
+    Value: 30
+  - Type: 3
+    Value: 60
