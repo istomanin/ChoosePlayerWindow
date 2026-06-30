@@ -9,6 +9,7 @@ public class CharacterManager : MonoBehaviour
 
     public CharacterStats FinalStats => finalStats;
     private readonly List<StatModifier> modifiers = new();
+    public IReadOnlyList<StatModifier> Modifiers => modifiers;
 
     [SerializeField]
     private CharacterData[] characterClasses;
@@ -23,8 +24,6 @@ public class CharacterManager : MonoBehaviour
 
         SelectCharacter(0);
 
-        RecalculateStats();
-
     }
 
 
@@ -38,12 +37,12 @@ public class CharacterManager : MonoBehaviour
     {
         StatModifier modifier = new()
         {
-            StatType = (StatType)Random.Range(0, 4),
-
+            StatType = GetRandomStat(),
             Value = Random.Range(10, 31)
         };
 
         modifiers.Add(modifier);
+
 
         RecalculateStats();
     }
@@ -68,18 +67,18 @@ public class CharacterManager : MonoBehaviour
 
     private CharacterStats CreateStats(CharacterData data)
     {
-        CharacterStats stats = new();
+        CharacterStats result = new();
 
         foreach (Stats stat in data.BaseStats)
         {
-            stats.Stats.Add(new Stats()
+            result.Stats.Add(new Stats
             {
                 Type = stat.Type,
                 Value = stat.Value
             });
         }
 
-        return stats;
+        return result;
     }
 
     private void RecalculateStats()
@@ -94,5 +93,10 @@ public class CharacterManager : MonoBehaviour
 
         OnStatsChanged?.Invoke();
 
+    }
+
+    private StatType GetRandomStat()
+    {
+        return baseStats.GetRandomStatType();
     }
 }

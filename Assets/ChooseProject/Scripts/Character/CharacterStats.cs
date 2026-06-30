@@ -34,4 +34,11 @@ public class CharacterStats : ICloneable
         if (stat != null)
             stat.Value += value;
     }
+
+    public StatType GetRandomStatType()
+    {
+        int randomIndex = UnityEngine.Random.Range(0, Stats.Count);
+
+        return Stats[randomIndex].Type;
+    }
 }

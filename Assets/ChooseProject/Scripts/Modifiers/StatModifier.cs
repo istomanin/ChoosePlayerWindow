@@ -6,4 +6,9 @@ public class StatModifier
 
     public int Value;
 
+    public override string ToString()
+    {
+        return $"+{Value} {StatType}";
+    }
+
 }

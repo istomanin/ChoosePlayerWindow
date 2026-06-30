@@ -4,6 +4,5 @@ using System;
 public class Stats
 {
     public StatType Type;
-
     public int Value;
 }
