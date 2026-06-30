@@ -75,7 +75,7 @@ public class CharacterManager : MonoBehaviour
 
         foreach (Stats stat in data.BaseStats)
         {
-            result.Stats.Add(new Stats
+            result.AddStat(new Stats
             {
                 Type = stat.Type,
                 Value = stat.Value

@@ -1,17 +1,19 @@
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 public class CharacterStats : ICloneable
 {
-    public List<Stats> Stats = new();
+    [SerializeField]
+    private readonly List<Stats> stats = new();
 
     public object Clone()
     {
         CharacterStats clone = new();
 
-        foreach (Stats stat in Stats)
+        foreach (Stats stat in stats)
         {
-            clone.Stats.Add(new Stats()
+            clone.stats.Add(new Stats()
             {
                 Type = stat.Type,
                 Value = stat.Value
@@ -24,12 +26,21 @@ public class CharacterStats : ICloneable
 
     public int GetValue(StatType type)
     {
-        return Stats.Find(s => s.Type == type).Value;
+        Stats stat = stats.Find(s => s.Type == type);
+
+        if (stat == null)
+            return 0;
+
+        return stat.Value;
+    }
+    public void AddStat(Stats stat)
+    {
+        stats.Add(stat);
     }
 
     public void AddValue(StatType type, int value)
     {
-        Stats stat = Stats.Find(s => s.Type == type);
+        Stats stat = stats.Find(s => s.Type == type);
 
         if (stat != null)
             stat.Value += value;
@@ -37,16 +48,16 @@ public class CharacterStats : ICloneable
 
     public StatType GetRandomStatType()
     {
-        int randomIndex = UnityEngine.Random.Range(0, Stats.Count);
+        int randomIndex = UnityEngine.Random.Range(0, stats.Count);
 
-        return Stats[randomIndex].Type;
+        return stats[randomIndex].Type;
     }
 
     public int GetPower()
     {
         int power = 0;
 
-        foreach (Stats stat in Stats)
+        foreach (Stats stat in stats)
         {
             power += stat.Value;
         }
