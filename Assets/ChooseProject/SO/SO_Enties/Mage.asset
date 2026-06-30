@@ -12,8 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcb7f9e961e29c44daf7b97e619b26e1, type: 3}
   m_Name: Mage
   m_EditorClassIdentifier: Assembly-CSharp::CharacterData
-  className: 
-  health: 0
-  attack: 0
-  defense: 0
-  speed: 0
+  className: Mage
+  baseStats:
+  - Type: 0
+    Value: 70
+  - Type: 1
+    Value: 100
+  - Type: 2
+    Value: 40
+  - Type: 3
+    Value: 40

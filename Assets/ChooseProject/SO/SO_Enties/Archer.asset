@@ -12,8 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcb7f9e961e29c44daf7b97e619b26e1, type: 3}
   m_Name: Archer
   m_EditorClassIdentifier: Assembly-CSharp::CharacterData
-  className: 
-  health: 0
-  attack: 0
-  defense: 0
-  speed: 0
+  className: Archer
+  baseStats:
+  - Type: 0
+    Value: 60
+  - Type: 1
+    Value: 90
+  - Type: 2
+    Value: 30
+  - Type: 3
+    Value: 60
